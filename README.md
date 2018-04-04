@@ -1,2 +1,2 @@
-# My-Lightning
+# Contacts Search
 My Practice Lightning Components 
