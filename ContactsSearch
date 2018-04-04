@@ -1,0 +1,72 @@
+//ContactsSearch Component
+/*component*/
+<aura:component controller="ContactListController_Server" implements="force:appHostable,flexipage:availableForAllPageTypes" > 
+    <aura:attribute name="txtContact" type="String" description="Contact Name to be searched" /> 
+    <aura:attribute name="rows" type="object[]" description="Values returned from Apex" /> 
+    <aura:attribute name="ValueOneisTrue" type="boolean" default="true"/>
+    <aura:attribute name="ValueTwoisTrue" type="boolean" default="false"/>
+    <aura:attribute name="IsSpinner" type="Boolean"/>
+    <div class="slds">
+        <aura:if  isTrue="{!(v.ValueOneisTrue)}" >
+            <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                <div class="slds-col slds-size--1-of-1">     
+                    <div class="lds-form--horizontal">
+                        <label class="slds-form-element__label" for="text-input-01">Contact Name</label>
+                        <div class="slds-form-element__control"> 
+                            <ui:inputText aura:id="txtContactName" value="{!v.txtContact}" class="slds-input" placeholder="Text to search" />
+                        </div>
+                    </div> 
+                </div>
+                <div class="slds-col slds-size--1-of-1"> 
+                    <button class="slds-button slds-theme--alt-inverse slds-p-left--medium slds-p-right--medium" onclick="{!c.search}">Search</button>
+                    <div class="exampleHolder">
+                        <lightning:spinner aura:id="mySpinner" class="slds-hide"/>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if  isTrue="{!(v.ValueTwoisTrue)}" >
+            
+            <p>
+                Search Results :
+            </p>
+            <table class="slds-table slds-table--bordered">
+                <thead>
+                    <tr class="slds-text-heading--label">
+                        <th class="slds-cell-shrink"> 
+                            Contact Name
+                        </th> 
+                        <th class="slds-cell-shrink"> 
+                            Phone
+                        </th> 
+                        <th class="slds-cell-shrink"> 
+                            Email
+                        </th> 
+                        <th class="slds-cell-shrink"> 
+                            Account Name
+                        </th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.rows}" var="r">
+                        <tr class="slds-hint-parent">
+                            <td class="slds-cell-shrink" data-label="Select Row">
+                                {!r.Name}
+                            </td> 
+                            <td class="slds-cell-shrink" data-label="Select Row">
+                                {!r.Phone}
+                            </td> 
+                            <td class="slds-cell-shrink" data-label="Select Row">
+                                {!r.Email}
+                            </td>
+                            <td class="slds-cell-shrink" data-label="Select Row">
+                                {!r.Account.Name}
+                            </td> 
+                        </tr> 
+                    </aura:iteration> 
+                </tbody>
+            </table>
+        </aura:if> 
+    </div> 
+    
+</aura:component>
