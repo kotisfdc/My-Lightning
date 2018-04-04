@@ -1,0 +1,9 @@
+public class ContactListController_Server {
+    
+    @AuraEnabled
+    public static List<Contact> getContacts(String search){
+        search = '%'+search+'%' ;
+        return [SELECT Name,Email,Phone,Account.Name FROM Contact WHERE Account.Name!= null AND Name LIKE :search ] ;
+    }
+
+}
